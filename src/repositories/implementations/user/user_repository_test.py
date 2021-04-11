@@ -27,6 +27,20 @@ def test_insert_user():
     assert new_user.username == query_user.username
 
 
+def test_insert_user_except(mocker: MockerFixture):
+    """ Should raise exception if insert throws """
+
+    engine = db_conn_handler.get_engine()
+    stub = mocker.stub(name="db_conn_handler.session.rollback")
+
+    with pytest.raises(Exception):
+        user_repository.insert(username="any_username", password="any_pass")
+
+        engine.execute("DELETE FROM user WHERE id='{}';".format(1))
+
+        stub.assert_called()
+
+
 def test_fetch_users():
     """ Should fetch users from database """
 
