@@ -1,6 +1,6 @@
 from typing import List
-from src.repositories.config import DBConnectionHandler
 from sqlalchemy.orm.exc import NoResultFound
+from src.repositories.config import DBConnectionHandler
 from src.entities import User
 
 
