@@ -23,4 +23,23 @@ def test_insert_user():
 
     assert new_user.id == query_user.id
     assert new_user.username == query_user.username
-    assert new_user.password == query_user.password
+
+
+def test_fetch_users():
+    """ Should fetch users from database """
+
+    username1 = faker.name()
+    username2 = faker.name()
+    password = faker.word()
+    engine = db_conn_handler.get_engine()
+
+    new_user1 = user_repository.insert(username=username1, password=password)
+    new_user2 = user_repository.insert(username=username2, password=password)
+
+    result = user_repository.fetch()
+
+    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user1.id))
+    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user2.id))
+
+    assert new_user1.id == result[0].id
+    assert new_user2.id == result[1].id
