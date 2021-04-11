@@ -38,7 +38,11 @@ ORM do banco de dados. Neste projeto, será utilizado o SQL Lite.
 
 ### Salva as packages do venv no requeriments.txt
 
-``` pylint --generate-rcfile > .pylintrc ``` 
+*Linux:*
+``` venv/bin/pip3 freeze > requirements.txt ``` 
+
+*Windows:*
+``` venv/Scripts/pip3.exe freeze > requirements.txt ```
 
 ### Reconfigurar Git ao clonar o repositório
 Caso você receba um erro ao clonar o repositório e tentar realizar um commit, sendo o erro ```/usr/bin/env: ‘python3.8’: No such file or directory``` no windows, você deve desinstalar o pre-commit e instalá-lo novamente com os seguintes comandos:
