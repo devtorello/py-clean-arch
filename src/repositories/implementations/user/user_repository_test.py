@@ -133,3 +133,14 @@ def test_find_user_except(mocker: MockerFixture):
         user_repository.find(user_id="1")
 
         stub.assert_called()
+
+
+def test_find_user_finally(mocker: MockerFixture):
+    """ Should raise finally when code reaches finally """
+
+    stub = mocker.stub(name="db_conn_handler.session.close")
+
+    with pytest.raises(Exception):
+        user_repository.fetch()
+
+        stub.assert_called()
