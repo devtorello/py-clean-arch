@@ -31,6 +31,9 @@ Verificador de código para saber se o que está sendo commitado está dentro do
 ### Pre-Commit
 Realiza o lint, formatação e teste nos códigos antes de qualquer commit.
 
+### SQL Alchemy
+ORM do banco de dados. Neste projeto, será utilizado o SQL Lite.
+
 ## Códigos Necessários / Úteis
 
 ### Salva as packages do venv no requeriments.txt
