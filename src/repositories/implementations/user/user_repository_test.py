@@ -1,3 +1,4 @@
+import pytest
 from faker import Faker
 from src.repositories.config import DBConnectionHandler
 from .user_repository import UserRepository
@@ -70,3 +71,12 @@ def test_not_find_user():
     result = user_repository.find(user_id="1")
 
     assert result is None
+
+
+def test_find_user_except():
+    """ Should raise exception if it throws """
+
+    with pytest.raises(Exception):
+        user_repository.find(user_id="1")
+
+        assert db_conn_handler.session.rollback()
