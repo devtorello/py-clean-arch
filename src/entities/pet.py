@@ -1,6 +1,6 @@
+import enum
 from sqlalchemy import Column, String, Integer, ForeignKey, Enum
 from src.repositories.config import Base
-import enum
 
 
 class AnimalTypes(enum.Enum):
