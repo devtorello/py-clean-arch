@@ -4,3 +4,4 @@ venv
 .vscode
 storage.db
 storage.db-journal
+.coverage
