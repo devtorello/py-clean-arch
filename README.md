@@ -17,6 +17,21 @@ Para entrar em seu ambiente virtual, execute o código `. venv/bin/activate` no 
 ### Instalação dos Packages
 Como ultimo requerimento, execute o código `venv/bin/pip3 install -r requirements.txt` para linux ou `venv\Scripts\pip3.exe install -r requirements.txt` para windows para instalar todos os packages necessários para o funcionamento da aplicação.
 
+## Criação e Instanciação do Banco de Dados (SQLite)
+Para a criação do banco os seguintes passos devem ser seguidos via linha de comando:
+
+1. ``` python ```
+
+O passo 1 iniciará o python e você deverá executar os seguintes códigos:
+
+2. ``` from src.repositories.config import * ```
+3. ``` from src.entities import * ```
+4. ``` db_conn = DBConnectionHandler() ```
+5. ``` engine = db_conn.get_engine() ```
+6. ``` Base.metadata.create_all(engine) ```
+
+Após o passo 6, um arquivo chamado `storage.db` será criado com as configurações do seu banco de dados.
+
 ## Packages Utilizadas no Projeto
 
 ### Pylint
@@ -32,7 +47,7 @@ Verificador de código para saber se o que está sendo commitado está dentro do
 Realiza o lint, formatação e teste nos códigos antes de qualquer commit.
 
 ### SQL Alchemy
-ORM do banco de dados. Neste projeto, será utilizado o SQL Lite.
+ORM do banco de dados. Neste projeto, será utilizado o SQLite.
 
 ## Informações Úteis
 
