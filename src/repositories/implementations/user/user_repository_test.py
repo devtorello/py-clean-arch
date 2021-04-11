@@ -42,7 +42,7 @@ def test_insert_user_except(mocker: MockerFixture):
 
 
 def test_insert_user_finally(mocker: MockerFixture):
-    """ Should call close when code reachs finally """
+    """ Should call close when code reaches finally """
 
     engine = db_conn_handler.get_engine()
     stub = mocker.stub(name="db_conn_handler.session.close")
@@ -79,6 +79,17 @@ def test_fetch_user_except(mocker: MockerFixture):
     """ Should raise exception if fetch throws """
 
     stub = mocker.stub(name="db_conn_handler.session.rollback")
+
+    with pytest.raises(Exception):
+        user_repository.fetch()
+
+        stub.assert_called()
+
+
+def test_fetch_user_finally(mocker: MockerFixture):
+    """ Should raise finally when code reaches finally """
+
+    stub = mocker.stub(name="db_conn_handler.session.close")
 
     with pytest.raises(Exception):
         user_repository.fetch()
