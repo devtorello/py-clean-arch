@@ -45,7 +45,7 @@ def test_fetch_users():
     assert new_user2.id == result[1].id
 
 
-def test_find_users():
+def test_find_user():
     """ Should find a specific user in database """
 
     username1 = faker.name()
@@ -62,3 +62,11 @@ def test_find_users():
     engine.execute("DELETE FROM user WHERE id='{}';".format(new_user2.id))
 
     assert new_user2.id == result.id
+
+
+def test_not_find_user():
+    """ Should not find user if it didn't exist """
+
+    result = user_repository.find(user_id="1")
+
+    assert result is None
