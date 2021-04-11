@@ -12,10 +12,10 @@ O ambiente virtual utilizado neste projeto será o venv (virtualenv) e caso voc�
 Após a instalação, execute o código `virtualenv -p python3 venv` para executar a criação do ambiente virtual na pasta do projeto.
 
 ### Acesso ao Ambiente Virtual
-Para entrar em seu ambiente virtual, execute o código `. venv/bin/activate` no bash do linux.
+Para entrar em seu ambiente virtual, execute o código `. venv/bin/activate` no bash do linux ou `venv\Scripts\activate.bat` no cmd do windows.
 
 ### Instalação dos Packages
-Como ultimo requerimento, execute o código `venv/bin/pip3 install -r requirements.txt` para instalar todos os packages necessários para o funcionamento da aplicação.
+Como ultimo requerimento, execute o código `venv/bin/pip3 install -r requirements.txt` para linux ou `venv\Scripts\pip3.exe install -r requirements.txt` para windows para instalar todos os packages necessários para o funcionamento da aplicação.
 
 ## Packages Utilizadas no Projeto
 
@@ -34,11 +34,18 @@ Realiza o lint, formatação e teste nos códigos antes de qualquer commit.
 ### SQL Alchemy
 ORM do banco de dados. Neste projeto, será utilizado o SQL Lite.
 
-## Códigos Necessários / Úteis
+## Informações Úteis
 
 ### Salva as packages do venv no requeriments.txt
 
 ``` pylint --generate-rcfile > .pylintrc ``` 
+
+### Reconfigurar Git ao clonar o repositório
+Caso você receba um erro ao clonar o repositório e tentar realizar um commit, sendo o erro ```/usr/bin/env: ‘python3.8’: No such file or directory``` no windows, você deve desinstalar o pre-commit e instalá-lo novamente com os seguintes comandos:
+
+```pre-commit uninstall```
+
+```pre-commit install```
 
 ## Créditos
 Créditos ao youtuber Programador Lhama.
