@@ -1,5 +1,6 @@
 import pytest
 from faker import Faker
+from pytest_mock.plugin import MockerFixture
 from src.repositories.config import DBConnectionHandler
 from .user_repository import UserRepository
 
@@ -46,6 +47,17 @@ def test_fetch_users():
     assert new_user2.id == result[1].id
 
 
+def test_fetch_user_except(mocker: MockerFixture):
+    """ Should raise exception if fetch throws """
+
+    stub = mocker.stub(name="db_conn_handler.session.rollback")
+
+    with pytest.raises(Exception):
+        user_repository.fetch()
+
+        stub.assert_called()
+
+
 def test_find_user():
     """ Should find a specific user in database """
 
@@ -73,10 +85,12 @@ def test_not_find_user():
     assert result is None
 
 
-def test_find_user_except():
-    """ Should raise exception if it throws """
+def test_find_user_except(mocker: MockerFixture):
+    """ Should raise exception if find throws """
+
+    stub = mocker.stub(name="db_conn_handler.session.rollback")
 
     with pytest.raises(Exception):
         user_repository.find(user_id="1")
 
-        assert db_conn_handler.session.rollback()
+        stub.assert_called()
