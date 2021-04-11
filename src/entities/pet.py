@@ -1,16 +1,16 @@
+import enum
 from sqlalchemy import Column, String, Integer, ForeignKey, Enum
 from src.repositories.config import Base
-import enum
 
 
 class AnimalTypes(enum.Enum):
     """ Defining animal types """
 
-    dog = ("dog",)
-    cat = ("cat",)
-    bird = ("bird",)
-    fish = ("fish",)
-    turtle = "turtle"
+    DOG = "dog"
+    CAT = "cat"
+    BIRD = "bird"
+    FISH = "fish"
+    TURTLE = "turtle"
 
 
 class Pet(Base):

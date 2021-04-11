@@ -1,5 +1,5 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine, select
+from sqlalchemy.orm import Session
 
 
 class DBConnectionHandler:
@@ -8,6 +8,14 @@ class DBConnectionHandler:
     def __init__(self):
         self.__connection_string = "sqlite:///storage.db"
         self.session = None
+        self.select = None
+
+    def get_select(self):
+        """Get select instance
+        :return - select instance of sqlalchemy
+        """
+
+        return select
 
     def get_engine(self):
         """Return connection engine
@@ -21,8 +29,7 @@ class DBConnectionHandler:
 
     def __enter__(self):
         engine = create_engine(self.__connection_string)
-        session_maker = sessionmaker()
-        self.session = session_maker(bind=engine)
+        self.session = Session(engine, future=True)
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
