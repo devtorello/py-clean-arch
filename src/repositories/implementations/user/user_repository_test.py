@@ -43,3 +43,22 @@ def test_fetch_users():
 
     assert new_user1.id == result[0].id
     assert new_user2.id == result[1].id
+
+
+def test_find_users():
+    """ Should find a specific user in database """
+
+    username1 = faker.name()
+    username2 = faker.name()
+    password = faker.word()
+    engine = db_conn_handler.get_engine()
+
+    new_user1 = user_repository.insert(username=username1, password=password)
+    new_user2 = user_repository.insert(username=username2, password=password)
+
+    result = user_repository.find(user_id=new_user2.id)
+
+    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user1.id))
+    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user2.id))
+
+    assert new_user2.id == result.id
