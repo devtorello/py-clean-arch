@@ -2,10 +2,10 @@ from typing import List
 from sqlalchemy.orm.exc import NoResultFound
 from src.repositories.config import DBConnectionHandler
 from src.entities import User as UserModel
-from src.repositories.models import User
+from src.usecases.contracts import User, UserRepositoryInterface
 
 
-class UserRepository:
+class UserRepository(UserRepositoryInterface):
     """ Class to manage User Repository """
 
     @classmethod
