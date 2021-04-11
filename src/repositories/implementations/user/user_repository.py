@@ -1,7 +1,8 @@
 from typing import List
 from sqlalchemy.orm.exc import NoResultFound
 from src.repositories.config import DBConnectionHandler
-from src.entities import User
+from src.entities import User as UserModel
+from src.repositories.models import User
 
 
 class UserRepository:
@@ -16,7 +17,9 @@ class UserRepository:
         with DBConnectionHandler() as db_connection:
             try:
                 select = db_connection.get_select()
-                statement = select(User.id, User.username).order_by(User.id)
+                statement = select(UserModel.id, UserModel.username).order_by(
+                    UserModel.id
+                )
                 result = db_connection.session.execute(statement).all()
 
                 return result
@@ -37,7 +40,9 @@ class UserRepository:
         with DBConnectionHandler() as db_connection:
             try:
                 select = db_connection.get_select()
-                statement = select(User.id, User.username).filter_by(id=user_id)
+                statement = select(UserModel.id, UserModel.username).filter_by(
+                    id=user_id
+                )
                 result = db_connection.session.execute(statement).one()
 
                 return User(id=result.id, username=result.username)
@@ -59,7 +64,7 @@ class UserRepository:
 
         with DBConnectionHandler() as db_connection:
             try:
-                new_user = User(username=username, password=password)
+                new_user = UserModel(username=username, password=password)
                 db_connection.session.add(new_user)
                 db_connection.session.commit()
 
