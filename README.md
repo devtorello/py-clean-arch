@@ -25,7 +25,7 @@ Para a criação do banco os seguintes passos devem ser seguidos via linha de co
 O passo 1 iniciará o python e você deverá executar os seguintes códigos:
 
 2. ``` from src.repositories.config import * ```
-3. ``` from src.entities import * ```
+3. ``` from src.repositories.schemas import * ```
 4. ``` db_conn = DBConnectionHandler() ```
 5. ``` engine = db_conn.get_engine() ```
 6. ``` Base.metadata.create_all(engine) ```
