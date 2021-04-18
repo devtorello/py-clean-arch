@@ -22,8 +22,8 @@ def test_register_user():
     assert user_repo.insert_user_params["password"] == attributes["password"]
 
     # Testing Output
-    assert result["Success"] is True
-    assert result["Data"] is not None
+    assert result["success"] is True
+    assert result["data"] is not None
 
 
 def test_register_user_fail():
@@ -42,5 +42,5 @@ def test_register_user_fail():
     assert user_repo.insert_user_params == {}
 
     # Testing Output
-    assert result["Success"] is False
-    assert result["Data"] is None
+    assert result["success"] is False
+    assert result["data"] is None

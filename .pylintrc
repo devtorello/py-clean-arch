@@ -5,6 +5,7 @@ disable=
     W0107, # unnecessary-pass
     W0125, # use-conditional-value-with-constant
     E1128, # assignment-from-none
+    W0703, # general-exception 
 
 # A comma-separated list of package or module names from where C extensions may
 # be loaded. Extensions are loading into the active Python interpreter and may

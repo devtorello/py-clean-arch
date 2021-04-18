@@ -1,6 +1,5 @@
 import pytest
 from src.shared.validation.validators.required_field import RequiredFieldValidation
-from src.shared.validation.errors import GeneralException
 from .validator_composite import ValidatorComposite
 
 
@@ -19,7 +18,7 @@ def test_validator_composite_failure():
 
     sut = ValidatorComposite.build([RequiredFieldValidation("any_field")])
 
-    with pytest.raises(GeneralException) as execinfo:
+    with pytest.raises(ValueError) as execinfo:
         validations = sut.validate({"invalid_field": "any_value"})
 
         assert execinfo.value == validations

@@ -22,4 +22,4 @@ class RegisterUserUsecase(RegisterUser):
         if validate_entry:
             result = self.user_repository.insert(username, password)
 
-        return {"Success": validate_entry, "Data": result}
+        return {"success": validate_entry, "data": result}

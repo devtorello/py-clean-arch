@@ -1,6 +1,6 @@
 import pytest
+from src.shared.validation.errors import required_param_error
 from .required_field_validation import RequiredFieldValidation
-from src.shared.validation.errors import GeneralException
 
 FIELD = "valid_field"
 
@@ -20,9 +20,7 @@ def test_required_field_validation_invalid():
 
     sut = RequiredFieldValidation(FIELD)
 
-    with pytest.raises(GeneralException) as execinfo:
-        error = sut.validate({"invalid_field": "any_value"})
+    with pytest.raises(Exception) as execinfo:
+        sut.validate({"invalid_field": "any_value"})
 
-        # raise GeneralException({"error": f"Missing Param: {FIELD}"})
-
-        assert execinfo.value == error
+        assert execinfo == required_param_error(FIELD)
