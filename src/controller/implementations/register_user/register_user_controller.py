@@ -1,11 +1,11 @@
 from typing import Type
 from src.usecases.contracts import RegisterUser
-from src.controller.contracts import HttpRequest, HttpResponse
+from src.controller.contracts import HttpRequest, HttpResponse, Controller
 from src.shared.validation.contracts import Validation
 from src.controller.errors import HttpErrors
 
 
-class RegisterUserController:
+class RegisterUserController(Controller):
     """ Class to define controller to register_user use case """
 
     def __init__(
