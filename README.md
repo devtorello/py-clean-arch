@@ -66,12 +66,5 @@ Caso você receba um erro ao clonar o repositório e tentar realizar um commit, 
 
 ```pre-commit install```
 
-### Reconfigurar Git ao clonar o repositório
-Caso você receba um erro ao clonar o repositório e tentar realizar um commit, sendo o erro ```/usr/bin/env: ‘python3.8’: No such file or directory``` no windows, você deve desinstalar o pre-commit e instalá-lo novamente com os seguintes comandos:
-
-```pre-commit uninstall```
-
-```pre-commit install```
-
 ## Créditos
 Créditos ao youtuber Programador Lhama.
