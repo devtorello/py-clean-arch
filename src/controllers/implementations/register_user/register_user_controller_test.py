@@ -1,5 +1,5 @@
 from faker import Faker
-from src.controller.contracts.http_models import HttpRequest
+from src.controllers.contracts.http_models import HttpRequest
 from src.shared.validation.errors.required_params_error import required_param_error
 from src.shared.validation.mocks.mock_validation import ValidationStub
 from src.usecases.mocks.mock_user_repository import UserRepositoryStub

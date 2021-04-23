@@ -26,10 +26,9 @@ class RegisterUserStub:
         self.register_param["username"] = username
         self.register_param["password"] = password
 
-        response = None
-        validate_entry = isinstance(username, str) and isinstance(password, str)
+        if not isinstance(username, str) or not isinstance(password, str):
+            return {"success": False, "data": None}
 
-        if validate_entry:
-            response = mock_user()
+        response = mock_user()
 
-        return {"success": validate_entry, "data": response}
+        return {"success": True, "data": response}

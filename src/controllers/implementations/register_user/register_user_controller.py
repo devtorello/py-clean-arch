@@ -1,8 +1,8 @@
 from typing import Type
 from src.usecases.contracts import RegisterUser
-from src.controller.contracts import HttpRequest, HttpResponse, Controller
+from src.controllers.contracts import HttpRequest, HttpResponse, Controller
 from src.shared.validation.contracts import Validation
-from src.controller.errors import HttpErrors
+from src.controllers.errors import HttpErrors
 
 
 class RegisterUserController(Controller):

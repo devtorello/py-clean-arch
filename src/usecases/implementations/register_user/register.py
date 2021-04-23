@@ -16,10 +16,9 @@ class RegisterUserUsecase(RegisterUser):
         : return - dictionary containing information about the proccess
         """
 
-        result = None
-        validate_entry = isinstance(username, str) and isinstance(password, str)
+        if not isinstance(username, str) or not isinstance(password, str):
+            return {"success": False, "data": None}
 
-        if validate_entry:
-            result = self.user_repository.insert(username, password)
+        result = self.user_repository.insert(username, password)
 
-        return {"success": validate_entry, "data": result}
+        return {"success": True, "data": result}

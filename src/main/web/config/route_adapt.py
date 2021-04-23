@@ -1,8 +1,8 @@
 from typing import Type
 from flask.json import jsonify
 from sqlalchemy.exc import IntegrityError
-from src.controller.contracts import Controller, HttpRequest
-from src.controller.errors import HttpErrors
+from src.controllers.contracts import Controller, HttpRequest
+from src.controllers.errors import HttpErrors
 
 
 def route_adapter(request: any, controller: Type[Controller]) -> any:
