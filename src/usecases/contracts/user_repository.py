@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
-from collections import namedtuple
 from typing import List
-
-User = namedtuple("User", "id, username")
+from src.entities import User
 
 
 class UserRepositoryInterface(ABC):

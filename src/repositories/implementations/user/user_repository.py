@@ -1,8 +1,9 @@
 from typing import List
 from sqlalchemy.orm.exc import NoResultFound
 from src.repositories.config import DBConnectionHandler
-from src.entities import User as UserModel
-from src.usecases.contracts import User, UserRepositoryInterface
+from src.repositories.schemas import UserSchema
+from src.usecases.contracts import UserRepositoryInterface
+from src.entities import User
 
 
 class UserRepository(UserRepositoryInterface):
@@ -17,9 +18,9 @@ class UserRepository(UserRepositoryInterface):
         with DBConnectionHandler() as db_connection:
             try:
                 select = db_connection.get_select()
-                statement = select(UserModel.id, UserModel.username).order_by(
-                    UserModel.id
-                )
+                statement = select(
+                    UserSchema.id, UserSchema.username, UserSchema.password
+                ).order_by(UserSchema.id)
                 result = db_connection.session.execute(statement).all()
 
                 return result
@@ -30,7 +31,7 @@ class UserRepository(UserRepositoryInterface):
                 db_connection.session.close()
 
     @classmethod
-    def find(cls, user_id: int = None):
+    def find(cls, user_id: int = None) -> User:
         """Find a specific user on database.
         :params - user_id: User's id
                 - username: User's username
@@ -40,12 +41,16 @@ class UserRepository(UserRepositoryInterface):
         with DBConnectionHandler() as db_connection:
             try:
                 select = db_connection.get_select()
-                statement = select(UserModel.id, UserModel.username).filter_by(
-                    id=user_id
-                )
+                statement = select(
+                    UserSchema.id, UserSchema.username, UserSchema.password
+                ).filter_by(id=user_id)
                 result = db_connection.session.execute(statement).one()
 
-                return User(id=result.id, username=result.username)
+                return dict(
+                    User(
+                        id=result.id, username=result.username, password=result.password
+                    )._asdict()
+                )
             except NoResultFound:
                 return None
             except:
@@ -64,11 +69,17 @@ class UserRepository(UserRepositoryInterface):
 
         with DBConnectionHandler() as db_connection:
             try:
-                new_user = UserModel(username=username, password=password)
+                new_user = UserSchema(username=username, password=password)
                 db_connection.session.add(new_user)
                 db_connection.session.commit()
 
-                return User(id=new_user.id, username=new_user.username)
+                return dict(
+                    User(
+                        id=new_user.id,
+                        username=new_user.username,
+                        password=new_user.password,
+                    )._asdict()
+                )
             except:
                 db_connection.session.rollback()
                 raise

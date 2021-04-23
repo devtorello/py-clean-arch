@@ -13,7 +13,7 @@ class AnimalTypes(enum.Enum):
     TURTLE = "turtle"
 
 
-class Pet(Base):
+class PetSchema(Base):
     """ Pet Entity """
 
     __tablename__ = "pet"

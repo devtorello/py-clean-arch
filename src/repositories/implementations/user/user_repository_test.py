@@ -18,13 +18,13 @@ def test_insert_user():
 
     new_user = user_repository.insert(username=username, password=password)
     query_user = engine.execute(
-        "SELECT * FROM user WHERE id='{}';".format(new_user.id)
+        "SELECT * FROM user WHERE id='{}';".format(new_user["id"])
     ).fetchone()
 
-    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user.id))
+    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user["id"]))
 
-    assert new_user.id == query_user.id
-    assert new_user.username == query_user.username
+    assert new_user["id"] == query_user["id"]
+    assert new_user["username"] == query_user["username"]
 
 
 def test_insert_user_except(mocker: MockerFixture):
@@ -68,11 +68,11 @@ def test_fetch_users():
 
     result = user_repository.fetch()
 
-    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user1.id))
-    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user2.id))
+    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user1["id"]))
+    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user2["id"]))
 
-    assert new_user1.id == result[0].id
-    assert new_user2.id == result[1].id
+    assert new_user1["id"] == result[0]["id"]
+    assert new_user2["id"] == result[1]["id"]
 
 
 def test_fetch_user_except(mocker: MockerFixture):
@@ -108,12 +108,12 @@ def test_find_user():
     new_user1 = user_repository.insert(username=username1, password=password)
     new_user2 = user_repository.insert(username=username2, password=password)
 
-    result = user_repository.find(user_id=new_user2.id)
+    result = user_repository.find(user_id=new_user2["id"])
 
-    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user1.id))
-    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user2.id))
+    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user1["id"]))
+    engine.execute("DELETE FROM user WHERE id='{}';".format(new_user2["id"]))
 
-    assert new_user2.id == result.id
+    assert new_user2["id"] == result["id"]
 
 
 def test_not_find_user():
