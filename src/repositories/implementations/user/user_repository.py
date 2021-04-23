@@ -46,8 +46,10 @@ class UserRepository(UserRepositoryInterface):
                 ).filter_by(id=user_id)
                 result = db_connection.session.execute(statement).one()
 
-                return User(
-                    id=result.id, username=result.username, password=result.password
+                return dict(
+                    User(
+                        id=result.id, username=result.username, password=result.password
+                    )._asdict()
                 )
             except NoResultFound:
                 return None
@@ -71,10 +73,12 @@ class UserRepository(UserRepositoryInterface):
                 db_connection.session.add(new_user)
                 db_connection.session.commit()
 
-                return User(
-                    id=new_user.id,
-                    username=new_user.username,
-                    password=new_user.password,
+                return dict(
+                    User(
+                        id=new_user.id,
+                        username=new_user.username,
+                        password=new_user.password,
+                    )._asdict()
                 )
             except:
                 db_connection.session.rollback()
