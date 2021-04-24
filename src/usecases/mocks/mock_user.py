@@ -32,3 +32,18 @@ class RegisterUserStub:
         response = mock_user()
 
         return {"success": True, "data": response}
+
+
+class FindUserStub:
+    """ Find User Stub """
+
+    def __init__(self, user_repository: any):
+        self.user_repository = user_repository
+        self.find_user_param = {}
+
+    def execute(self, user_id: str) -> User:
+        """ Find user """
+
+        self.find_user_param["user_id"] = user_id
+
+        return mock_user()

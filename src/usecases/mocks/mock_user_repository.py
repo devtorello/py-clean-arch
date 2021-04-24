@@ -26,6 +26,6 @@ class UserRepositoryStub:
     def find(self, user_id: int = None) -> User:
         """ Spy to all the attributes """
 
-        self.find_user_params["id"] = user_id
+        self.find_user_params["user_id"] = user_id
 
         return mock_user()

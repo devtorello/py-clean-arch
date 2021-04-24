@@ -29,7 +29,7 @@ def test_find_user():
 
     result = sut.execute(user_id)
 
-    assert user_repo.find_user_params["id"] == user_id
+    assert user_repo.find_user_params["user_id"] == user_id
 
     assert result is not None
     assert isinstance(result, User)
@@ -50,6 +50,6 @@ def test_find_user_not_fond(mocker: MockerFixture):
         )
         result = sut.execute(user_id)
 
-        assert user_repo.find_user_params["id"] == user_id
+        assert user_repo.find_user_params["user_id"] == user_id
 
         assert result is None
