@@ -1,5 +1,5 @@
 # Python + Clean Arch
-Projeto protótipo baseado em um mini curso para utilização de clean architecture juntamente com aplicações Python.
+Projeto protótipo de implementação de um CRUD de usuários baseado em um mini curso para utilização de clean architecture juntamente com aplicações Python.
 
 ## Instalação do Projeto
 Após realizar o clone do projeto, é indicado que os seguintes passos sejam seguidos:
