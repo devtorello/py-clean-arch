@@ -23,6 +23,9 @@ class UserRepository(UserRepositoryInterface):
                 ).order_by(UserSchema.id)
                 result = db_connection.session.execute(statement).all()
 
+                if len(result) == 0:
+                    return []
+
                 return result
             except:
                 db_connection.session.rollback()
