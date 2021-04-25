@@ -1,6 +1,6 @@
 from src.controllers.contracts import Controller
-from src.controllers.implementations.register_user import RegisterUserController
-from src.usecases.implementations.register_user import RegisterUserUsecase
+from src.controllers.implementations.user.register_user import RegisterUserController
+from src.usecases.implementations.user.register_user import RegisterUserUsecase
 from src.repositories.implementations.user.user_repository import UserRepository
 from .register_user_validations import register_user_validations
 
