@@ -88,3 +88,27 @@ class UserRepository(UserRepositoryInterface):
                 raise
             finally:
                 db_connection.session.close()
+
+    @classmethod
+    def remove(cls, user_id: int) -> int:
+        """Remove an user from records.
+        :param  - user_id: User's unique id
+        :return - removed user from data base.
+        """
+
+        with DBConnectionHandler() as db_connection:
+            try:
+                deleted_rows = (
+                    db_connection.session.query(UserSchema)
+                    .filter(UserSchema.id == user_id)
+                    .delete(synchronize_session=False)
+                )
+
+                db_connection.session.commit()
+
+                return deleted_rows
+            except:
+                db_connection.session.rollback()
+                raise
+            finally:
+                db_connection.session.close()
