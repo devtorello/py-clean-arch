@@ -35,7 +35,7 @@ def test_find_user():
     assert isinstance(result, User)
 
 
-def test_find_user_not_fond(mocker: MockerFixture):
+def test_find_user_not_found(mocker: MockerFixture):
     """ Should return None if user does not exists """
 
     sut_variables = make_sut()
