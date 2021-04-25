@@ -153,3 +153,16 @@ def test_find_user_finally(mocker: MockerFixture):
         user_repository.fetch()
 
         stub.assert_called()
+
+
+def test_remove_user_success():
+    """ Should remove an user from user table """
+
+    username = faker.name()
+    password = faker.word()
+
+    new_user = user_repository.insert(username=username, password=password)
+
+    removed_user = user_repository.remove(user_id=new_user["id"])
+
+    assert removed_user == 1
