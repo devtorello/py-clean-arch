@@ -1,5 +1,5 @@
-from src.shared.validation.errors.required_params_error import required_param_error
 from faker import Faker
+from src.shared.validation.errors import required_param_error
 from src.controllers.contracts.http_models import HttpRequest
 from src.shared.validation.mocks.mock_validation import ValidationStub
 from src.usecases.mocks.mock_user_repository import UserRepositoryStub
@@ -12,7 +12,7 @@ faker = Faker()
 def mock_http_request():
     """ Mock Http Request """
 
-    return {"user_id": faker.random_number()}
+    return {"user_id": faker.random_number(), "valid_field": 1}
 
 
 def make_sut():
@@ -43,12 +43,12 @@ def test_find_user_success():
     params = mock_http_request()
     response = sut.handle(HttpRequest(query=params))
 
-    assert response.status_code == 400
+    assert response.status_code == 200
     assert response.body is not None
 
 
 def test_find_user_controller_bad_request():
-    """ Should return status 400 """
+    """ Should return status 400 + required field error """
 
     sut_variables = make_sut()
 
@@ -58,3 +58,16 @@ def test_find_user_controller_bad_request():
 
     assert response.status_code == 400
     assert response.body["error"] == required_param_error("valid_field")
+
+
+def test_find_user_controller_server_error():
+    """ Should return 500 """
+
+    sut_variables = make_sut()
+
+    sut = sut_variables["sut"]
+
+    response = sut.handle(HttpRequest(query={"valid_field": 1}))
+
+    assert response.status_code == 500
+    assert response.body["error"] is not None

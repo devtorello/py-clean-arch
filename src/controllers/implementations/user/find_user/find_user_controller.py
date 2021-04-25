@@ -29,6 +29,10 @@ class FindUserController(Controller):
             error = HttpErrors.bad_request(str(except_error))
 
             return HttpResponse(status_code=error["status_code"], body=error["body"])
+        except TypeError as except_error:
+            error = HttpErrors.bad_request(str(except_error))
+
+            return HttpResponse(status_code=error["status_code"], body=error["body"])
         except Exception as except_error:
             error = HttpErrors.server_error(str(except_error))
 
