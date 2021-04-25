@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 from faker import Faker
 from src.entities import User
 
@@ -47,3 +47,15 @@ class FindUserStub:
         self.find_user_param["user_id"] = user_id
 
         return mock_user()
+
+
+class FetchUsersStub:
+    """ Fetch Users Stub """
+
+    def __init__(self, user_repository: any):
+        self.user_repository = user_repository
+
+    def execute(self) -> List[User]:
+        """ Fetch Users """
+
+        return [mock_user()]

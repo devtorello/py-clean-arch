@@ -75,6 +75,15 @@ def test_fetch_users():
     assert new_user2["id"] == result[1]["id"]
 
 
+def test_fetch_users_empty():
+    """ Should return an empty list if there is no users """
+
+    result = user_repository.fetch()
+
+    assert len(result) == 0
+    assert result == []
+
+
 def test_fetch_user_except(mocker: MockerFixture):
     """ Should raise exception if fetch throws """
 

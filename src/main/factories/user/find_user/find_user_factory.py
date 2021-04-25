@@ -11,6 +11,6 @@ def find_user_factory() -> Controller:
     repository = UserRepository()
     use_case = FindUserUseCase(repository)
     validations = find_user_validations()
-    register_user_controller = FindUserController(use_case, validations)
+    controller = FindUserController(use_case, validations)
 
-    return register_user_controller
+    return controller
