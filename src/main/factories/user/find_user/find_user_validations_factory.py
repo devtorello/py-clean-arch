@@ -6,7 +6,7 @@ from src.shared.validation.validators.composite import ValidatorComposite
 def find_user_validations() -> Type[ValidatorComposite]:
     """ Make Find User Validations """
 
-    arr_validations = [Builder.field("user_id").required().is_number().build()]
+    arr_validations = [Builder.field("user_id").required().build()]
 
     validations = sum(arr_validations, [])
 

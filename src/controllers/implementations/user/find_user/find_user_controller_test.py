@@ -12,7 +12,7 @@ faker = Faker()
 def mock_http_request():
     """ Mock Http Request """
 
-    return {"user_id": faker.random_number(), "valid_field": 1}
+    return {"user_id": "1", "valid_field": 1}
 
 
 def make_sut():
