@@ -4,7 +4,7 @@ from src.entities import User
 
 
 class FindUserUseCase(FindUser):
-    """ Register User Usecase Implementation """
+    """ Find User Usecase Implementation """
 
     def __init__(self, user_repository: Type[UserRepositoryInterface]):
         self.user_repository = user_repository

@@ -1,6 +1,16 @@
 from abc import ABC, abstractclassmethod
-from typing import Dict
+from typing import Dict, List
 from src.entities import User
+
+
+class FetchUsers(ABC):
+    """ Interface to Fetch Users Usecase """
+
+    @abstractclassmethod
+    def execute(cls) -> List[User]:
+        """ Fetch Users Usecase """
+
+        raise Exception("Method not Implemented: Fetch Users")
 
 
 class FindUser(ABC):
@@ -8,7 +18,7 @@ class FindUser(ABC):
 
     @abstractclassmethod
     def execute(cls, user_id: int) -> User:
-        """ Register User Usecase """
+        """ Find User Usecase """
 
         raise Exception("Method not Implemented: Find User")
 
