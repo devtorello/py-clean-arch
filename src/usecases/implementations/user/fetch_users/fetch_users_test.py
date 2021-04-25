@@ -1,4 +1,5 @@
 from faker import Faker
+from pytest_mock.plugin import MockerFixture
 from src.entities.user import User
 from src.usecases.mocks import UserRepositoryStub
 from .fetch_users import FetchUsersUseCase
@@ -27,3 +28,20 @@ def test_fetch_user():
     assert result is not None
     assert isinstance(result, list)
     assert isinstance(result[0], User)
+    assert len(result) > 0
+
+
+def test_fetch_user_empty_list(mocker: MockerFixture):
+    """ Should fetch users and return empty list if there is no user """
+
+    sut_variables = make_sut()
+
+    sut, user_repo = sut_variables["sut"], sut_variables["user_repo"]
+
+    mocker.patch.context_manager(user_repo, "fetch", return_value=[])
+
+    result = sut.execute()
+
+    assert result is not None
+    assert isinstance(result, list)
+    assert len(result) == 0
