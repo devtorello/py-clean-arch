@@ -166,3 +166,14 @@ def test_remove_user_success():
     removed_user = user_repository.remove(user_id=new_user["id"])
 
     assert removed_user == 1
+
+
+def test_remove_user_except(mocker: MockerFixture):
+    """ Should raise exception if remove throws """
+
+    stub = mocker.stub(name="db_conn_handler.session.rollback")
+
+    with pytest.raises(Exception):
+        user_repository.remove(user_id="1")
+
+        stub.assert_called()
