@@ -31,3 +31,13 @@ class RegisterUser(ABC):
         """ Register User Usecase """
 
         raise Exception("Method not Implemented: Register User")
+
+
+class RemoveUser(ABC):
+    """ Interface to Remove User Usecase """
+
+    @abstractclassmethod
+    def execute(cls, user_id: int) -> bool:
+        """ Remove User Usecase """
+
+        raise Exception("Method not Implemented: Remove User")
