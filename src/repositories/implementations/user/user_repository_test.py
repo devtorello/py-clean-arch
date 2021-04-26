@@ -177,3 +177,14 @@ def test_remove_user_except(mocker: MockerFixture):
         user_repository.remove(user_id="1")
 
         stub.assert_called()
+
+
+def test_remove_user_finally(mocker: MockerFixture):
+    """ Should raise finally when code reaches finally """
+
+    stub = mocker.stub(name="db_conn_handler.session.close")
+
+    with pytest.raises(Exception):
+        user_repository.remove(user_id="1")
+
+        stub.assert_called()
