@@ -59,3 +59,18 @@ class FetchUsersStub:
         """ Fetch Users """
 
         return [mock_user()]
+
+
+class RemoveUserStub:
+    """ Remove User Stub """
+
+    def __init__(self, user_repository: any):
+        self.user_repository = user_repository
+        self.remove_user_param = {}
+
+    def execute(self, user_id: str) -> User:
+        """ Remove user """
+
+        self.remove_user_param["user_id"] = user_id
+
+        return 1
