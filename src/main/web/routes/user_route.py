@@ -29,7 +29,7 @@ def fetch_users():
     return route_adapter(request=request, controller=fetch_users_factory())
 
 
-@user_routes_bp.route("remove", methods=["GET"])
+@user_routes_bp.route("/remove", methods=["DELETE"])
 def remove_user():
     """ remove user route """
 
