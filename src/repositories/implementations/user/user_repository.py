@@ -21,12 +21,12 @@ class UserRepository(UserRepositoryInterface):
                 statement = select(
                     UserSchema.id, UserSchema.username, UserSchema.password
                 ).order_by(UserSchema.id)
-                result = db_connection.session.execute(statement).all()
+                results = db_connection.session.execute(statement).all()
 
-                if len(result) == 0:
+                if len(results) == 0:
                     return []
 
-                return result
+                return [dict(result) for result in results]
             except:
                 db_connection.session.rollback()
                 raise
