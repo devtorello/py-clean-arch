@@ -58,3 +58,16 @@ def test_remove_user_controller_bad_request():
 
     assert response.status_code == 400
     assert response.body["error"] == required_param_error("valid_field")
+
+
+def test_find_user_controller_server_error():
+    """ Should return 500 """
+
+    sut_variables = make_sut()
+
+    sut = sut_variables["sut"]
+
+    response = sut.handle(HttpRequest(query={"valid_field": 1}))
+
+    assert response.status_code == 500
+    assert response.body["error"] is not None
