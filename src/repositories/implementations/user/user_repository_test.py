@@ -153,3 +153,38 @@ def test_find_user_finally(mocker: MockerFixture):
         user_repository.fetch()
 
         stub.assert_called()
+
+
+def test_remove_user_success():
+    """ Should remove an user from user table """
+
+    username = faker.name()
+    password = faker.word()
+
+    new_user = user_repository.insert(username=username, password=password)
+
+    removed_user = user_repository.remove(user_id=new_user["id"])
+
+    assert removed_user == 1
+
+
+def test_remove_user_except(mocker: MockerFixture):
+    """ Should raise exception if remove throws """
+
+    stub = mocker.stub(name="db_conn_handler.session.rollback")
+
+    with pytest.raises(Exception):
+        user_repository.remove(user_id="1")
+
+        stub.assert_called()
+
+
+def test_remove_user_finally(mocker: MockerFixture):
+    """ Should raise finally when code reaches finally """
+
+    stub = mocker.stub(name="db_conn_handler.session.close")
+
+    with pytest.raises(Exception):
+        user_repository.remove(user_id="1")
+
+        stub.assert_called()

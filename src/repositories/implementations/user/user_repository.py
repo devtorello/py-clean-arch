@@ -21,12 +21,12 @@ class UserRepository(UserRepositoryInterface):
                 statement = select(
                     UserSchema.id, UserSchema.username, UserSchema.password
                 ).order_by(UserSchema.id)
-                result = db_connection.session.execute(statement).all()
+                results = db_connection.session.execute(statement).all()
 
-                if len(result) == 0:
+                if len(results) == 0:
                     return []
 
-                return result
+                return [dict(result) for result in results]
             except:
                 db_connection.session.rollback()
                 raise
@@ -83,6 +83,30 @@ class UserRepository(UserRepositoryInterface):
                         password=new_user.password,
                     )._asdict()
                 )
+            except:
+                db_connection.session.rollback()
+                raise
+            finally:
+                db_connection.session.close()
+
+    @classmethod
+    def remove(cls, user_id: int) -> int:
+        """Remove an user from records.
+        :param  - user_id: User's unique id
+        :return - removed user from data base.
+        """
+
+        with DBConnectionHandler() as db_connection:
+            try:
+                deleted_rows = (
+                    db_connection.session.query(UserSchema)
+                    .filter(UserSchema.id == user_id)
+                    .delete(synchronize_session=False)
+                )
+
+                db_connection.session.commit()
+
+                return deleted_rows
             except:
                 db_connection.session.rollback()
                 raise

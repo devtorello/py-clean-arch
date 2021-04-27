@@ -1,4 +1,5 @@
 from flask import Blueprint, request
+from src.main.factories.user.remove_user.remove_user_factory import remove_user_factory
 from src.main.factories.user.register_user import register_user_factory
 from src.main.factories.user.fetch_users import fetch_users_factory
 from src.main.factories.user.find_user import find_user_factory
@@ -26,3 +27,10 @@ def fetch_users():
     """ fetch users route """
 
     return route_adapter(request=request, controller=fetch_users_factory())
+
+
+@user_routes_bp.route("/remove", methods=["DELETE"])
+def remove_user():
+    """ remove user route """
+
+    return route_adapter(request=request, controller=remove_user_factory())

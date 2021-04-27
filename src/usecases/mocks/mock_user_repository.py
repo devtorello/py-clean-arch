@@ -9,6 +9,7 @@ class UserRepositoryStub:
     def __init__(self):
         self.insert_user_params = {}
         self.find_user_params = {}
+        self.remove_user_params = {}
 
     def insert(self, username: str, password: str) -> User:
         """ Spy to all the attributes """
@@ -29,3 +30,10 @@ class UserRepositoryStub:
         self.find_user_params["user_id"] = user_id
 
         return mock_user()
+
+    def remove(self, user_id: int) -> int:
+        """ Spy to all the attributes and method return """
+
+        self.remove_user_params["user_id"] = user_id
+
+        return 1

@@ -23,3 +23,9 @@ class UserRepositoryInterface(ABC):
         """ abstractmethod """
 
         raise Exception("Method not Implemented: Insert User")
+
+    @abstractmethod
+    def remove(self, user_id: int) -> int:
+        """ abstractmethod """
+
+        raise Exception("Method not Implemented: Remove User")
